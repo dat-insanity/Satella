@@ -3,11 +3,9 @@ import Foundation
 public struct SatellaPolicy: Sendable {
     public init(
         isEnabled: Bool,
-        authorizedBundleIDs: Set<String>,
         selectedBundleIDs: Set<String>
     ) {
         self.isEnabled = isEnabled
-        self.authorizedBundleIDs = authorizedBundleIDs
         self.selectedBundleIDs = selectedBundleIDs
     }
 
@@ -20,11 +18,9 @@ public struct SatellaPolicy: Sendable {
             return false
         }
 
-        return authorizedBundleIDs.contains(bundleID)
-            && selectedBundleIDs.contains(bundleID)
+        return selectedBundleIDs.contains(bundleID)
     }
 
     public let isEnabled: Bool
-    public let authorizedBundleIDs: Set<String>
     public let selectedBundleIDs: Set<String>
 }

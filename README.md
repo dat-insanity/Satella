@@ -11,11 +11,11 @@ It contains:
 
 StoreKit 2 testing uses Apple's StoreKit Test environment. Satella does not alter App Store-signed JWS transactions or intercept production receipt-validation endpoints.
 
-## Authorized targets
+## App selection
 
-The loader allowlist is the `Filter/Bundles` array in `Tweak/Satella.plist`. It contains only `emt.paisseon.satellalab` by default. The Settings selector shows only installed applications in this build-time list, and runtime policy additionally requires the application to be selected.
+The Settings selector lists installed user applications through AltList. Satella activates only in applications explicitly selected under Enabled Apps; Apple system applications remain excluded.
 
-Do not add an application unless you own it or have explicit authorization to test it.
+Select an application only when you own it or have explicit authorization to test it.
 
 ## Build
 
@@ -41,7 +41,7 @@ Open `Lab/SatellaStoreKitLab.xcodeproj`, choose the `SatellaStoreKitLab` scheme,
 After installing the Satella package:
 
 1. Open Settings → Satella 2 Lab.
-2. Enable the StoreKit 1 lab and select Satella StoreKit Lab under Enabled Test Apps.
+2. Enable the StoreKit 1 lab and select Satella StoreKit Lab under Enabled Apps.
 3. Tap Apply, then relaunch the lab app.
 4. Use its StoreKit 1 and StoreKit 2 tabs to run the test matrix.
 

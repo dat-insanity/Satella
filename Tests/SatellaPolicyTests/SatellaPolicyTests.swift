@@ -4,19 +4,20 @@ import XCTest
 final class SatellaPolicyTests: XCTestCase {
     private let labBundleID = "emt.paisseon.satellalab"
 
-    func testAuthorizedSelectedEnabledTargetIsActive() {
+    func testSelectedEnabledTargetIsActive() {
         let policy = makePolicy()
         XCTAssertTrue(policy.shouldOverrideStoreKit(in: labBundleID))
     }
 
-    func testAuthorizedButUnselectedTargetIsInactive() {
+    func testUnselectedTargetIsInactive() {
         let policy = makePolicy(selected: [])
         XCTAssertFalse(policy.shouldOverrideStoreKit(in: labBundleID))
     }
 
-    func testSelectedButUnauthorizedTargetIsInactive() {
-        let policy = makePolicy(authorized: [])
-        XCTAssertFalse(policy.shouldOverrideStoreKit(in: labBundleID))
+    func testAnySelectedUserTargetCanBeActive() {
+        let bundleID = "org.example.application"
+        let policy = makePolicy(selected: [bundleID])
+        XCTAssertTrue(policy.shouldOverrideStoreKit(in: bundleID))
     }
 
     func testDisabledTargetIsInactive() {
@@ -34,7 +35,6 @@ final class SatellaPolicyTests: XCTestCase {
         let appleBundle = "com.apple.Preferences"
         let policy = SatellaPolicy(
             isEnabled: true,
-            authorizedBundleIDs: [appleBundle],
             selectedBundleIDs: [appleBundle]
         )
         XCTAssertFalse(policy.shouldOverrideStoreKit(in: appleBundle))
@@ -47,12 +47,10 @@ final class SatellaPolicyTests: XCTestCase {
 
     private func makePolicy(
         isEnabled: Bool = true,
-        authorized: Set<String>? = nil,
         selected: Set<String>? = nil
     ) -> SatellaPolicy {
         SatellaPolicy(
             isEnabled: isEnabled,
-            authorizedBundleIDs: authorized ?? [labBundleID],
             selectedBundleIDs: selected ?? [labBundleID]
         )
     }

@@ -10,7 +10,7 @@ final class RootListController: PSListController {
 
             var specifiers = NSMutableArray()
             SpecifierFactory.add([
-                GroupCell(name: "General", footerText: "Changes apply immediately to running authorized apps; newly selected apps must be relaunched."),
+                GroupCell(name: "General", footerText: "Changes apply immediately to running enabled apps; newly selected apps must be relaunched."),
                 ToggleCell(name: "Enable StoreKit 1 Lab", key: "isEnabled", defaultValue: true)
             ], to: &specifiers, in: self)
 
@@ -19,8 +19,8 @@ final class RootListController: PSListController {
             }
 
             SpecifierFactory.add([
-                GroupCell(name: "Authorized Targets", footerText: "Only bundle identifiers in Satella.plist are shown. The package defaults to the included laboratory app."),
-                AppsCell(name: "Enabled Test Apps", key: "apps", defaultValue: false),
+                GroupCell(name: "App Selection", footerText: "Select the installed apps where Satella should be enabled."),
+                AppsCell(name: "Enabled Apps", key: "apps", defaultValue: false),
                 GroupCell(name: "Links", footerText: "StoreKit 2 testing uses Apple's signed StoreKit Test transactions; Satella does not modify JWS data."),
                 ButtonCell(name: "Source Code", action: #selector(openSource))
             ], to: &specifiers, in: self)

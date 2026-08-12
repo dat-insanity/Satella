@@ -163,20 +163,3 @@ void SatellaInstallHooks(void) {
 NSString *SatellaRootPath(NSString *path) {
     return ROOT_PATH_NS(path);
 }
-
-NSArray<NSString *> *SatellaAuthorizedBundleIdentifiers(void) {
-    NSString *filterPath = ROOT_PATH_NS(@"/Library/MobileSubstrate/DynamicLibraries/Satella.plist");
-    NSDictionary *propertyList = [NSDictionary dictionaryWithContentsOfFile:filterPath];
-    id bundles = propertyList[@"Filter"][@"Bundles"];
-    if (![bundles isKindOfClass:NSArray.class]) {
-        return @[];
-    }
-
-    NSMutableArray<NSString *> *validated = [NSMutableArray array];
-    for (id value in (NSArray *)bundles) {
-        if ([value isKindOfClass:NSString.class] && ![value hasPrefix:@"com.apple."]) {
-            [validated addObject:value];
-        }
-    }
-    return validated.copy;
-}

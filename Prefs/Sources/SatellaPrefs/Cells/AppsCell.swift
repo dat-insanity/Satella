@@ -24,7 +24,7 @@ struct AppsCell: SpecifierCell {
         appsCell.setProperty(true, forKey: "showIdentifiersAsSubtitle")
         appsCell.setProperty(true, forKey: "includeIdentifiersInSearch")
         appsCell.setProperty(true, forKey: "useSearchBar")
-        appsCell.setProperty(PrefsHelper.altListSections, forKey: "sections")
+        appsCell.setProperty(NSArray(array: [["sectionType": "User"]]), forKey: "sections")
         
         return appsCell
     }

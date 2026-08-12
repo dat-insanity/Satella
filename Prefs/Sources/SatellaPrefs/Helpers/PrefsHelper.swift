@@ -2,25 +2,6 @@ import CoreFoundation
 import Foundation
 
 enum PrefsHelper {
-    static let authorizedBundleIDs: [String] = SatellaPrefsAuthorizedBundleIdentifiers()
-
-    static var altListSections: NSArray {
-        guard !authorizedBundleIDs.isEmpty else {
-            return []
-        }
-
-        let quoted = authorizedBundleIDs
-            .map { "'\($0.replacingOccurrences(of: "'", with: "\\'"))'" }
-            .joined(separator: ",")
-        let predicate = "applicationIdentifier IN {\(quoted)}"
-
-        return [[
-            "sectionType": "Custom",
-            "sectionName": "Authorized Test Apps",
-            "sectionPredicate": predicate
-        ]] as NSArray
-    }
-
     static func getValue(for key: String, fallback: Any? = nil) -> Any? {
         read()[key] ?? fallback
     }

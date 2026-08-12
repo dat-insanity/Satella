@@ -31,7 +31,6 @@ enum Preferences {
         let values = snapshot
         let policy = SatellaPolicy(
             isEnabled: values.isEnabled,
-            authorizedBundleIDs: authorizedBundleIDs,
             selectedBundleIDs: values.apps
         )
         return policy.shouldOverrideStoreKit(in: Bundle.main.bundleIdentifier)
@@ -39,12 +38,6 @@ enum Preferences {
 
     @discardableResult
     static func start() -> Bool {
-        authorizedBundleIDs = Set(SatellaAuthorizedBundleIdentifiers())
-        guard !authorizedBundleIDs.isEmpty else {
-            NSLog("[Satella] Refusing to start without an authorized bundle filter")
-            return false
-        }
-
         reload()
         CFNotificationCenterAddObserver(
             CFNotificationCenterGetDarwinNotifyCenter(),
@@ -77,7 +70,6 @@ enum Preferences {
 
     private static let lock = NSLock()
     private static var current = PreferencesSnapshot.disabled
-    private static var authorizedBundleIDs = Set<String>()
 }
 
 private func preferencesDidChange(
