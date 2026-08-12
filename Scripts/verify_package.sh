@@ -41,7 +41,9 @@ preferences_archs="$(lipo -archs "$preferences")"
 [[ " $preferences_archs " == *" arm64 "* ]]
 [[ " $preferences_archs " == *" arm64e "* ]]
 
-if otool -L "$tweak" | grep -E '/Library/Frameworks|/usr/lib/libsubstrate' >/dev/null; then
+tweak_load_commands="$(otool -L "$tweak")"
+if printf '%s\n' "$tweak_load_commands" \
+  | grep -E '^[[:space:]]+/(Library/Frameworks|usr/lib/libsubstrate)' >/dev/null; then
   echo "rootful jailbreak load path found in Satella.dylib" >&2
   exit 1
 fi
@@ -59,7 +61,7 @@ mkdir -p "$(dirname "$report_path")"
   dpkg-deb -c "$package_path"
   echo
   echo "Satella.dylib load commands:"
-  otool -L "$tweak"
+  printf '%s\n' "$tweak_load_commands"
   echo
   echo "SatellaPrefs load commands:"
   otool -L "$preferences"
