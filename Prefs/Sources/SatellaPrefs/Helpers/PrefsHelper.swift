@@ -28,7 +28,7 @@ enum PrefsHelper {
     @discardableResult
     static func writeAndNotify() -> Bool {
         CFPreferencesAppSynchronize(preferenceDomain)
-        let wrote = SatellaPrefsMirrorPreferences(read() as NSDictionary)
+        let wrote = SatellaPrefsMirrorPreferences(read())
         CFNotificationCenterPostNotification(
             CFNotificationCenterGetDarwinNotifyCenter(),
             CFNotificationName(preferenceNotification),
