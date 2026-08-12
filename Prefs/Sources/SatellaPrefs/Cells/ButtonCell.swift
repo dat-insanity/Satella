@@ -1,6 +1,6 @@
 import Preferences
 
-struct ButtonCell: JinxCell {
+struct ButtonCell: SpecifierCell {
     let name: String
     let action: Selector
     

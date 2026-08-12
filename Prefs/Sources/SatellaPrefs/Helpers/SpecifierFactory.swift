@@ -2,7 +2,7 @@ import Preferences
 
 struct SpecifierFactory {
     static func add(
-        _ cells: [JinxCell],
+        _ cells: [SpecifierCell],
         to specifiers: inout NSMutableArray,
         in target: PSListController
     ) {

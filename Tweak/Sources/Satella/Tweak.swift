@@ -1,29 +1,56 @@
-import Jinx
+import Foundation
+import StoreKit
 
 struct Tweak {
     static func ctor() {
-        guard CommandLine.arguments[0].hasPrefix("/var/containers/Bundle/Application"),
-              Preferences.shouldInject()
-        else {
+        guard Preferences.start() else {
             return
         }
-        
-        CanPayHook().hook()
-        TransactionHook().hook()
-        
-        if Preferences.isPriceZero { ProductHook().hook() }
-        if Preferences.isObserver { ObserverHook().hook() }
-        if Preferences.isSideloaded { DelegateHook().hook() }
-        if Preferences.isStealth { DyldHook().hook() }
-        
-        if Preferences.isReceipt {
-            ReceiptHook().hook()
-            URLHook().hook()
-        }
+
+        SatellaInstallHooks()
+        NSLog("[Satella] Active in %@", Bundle.main.bundleIdentifier ?? "unknown bundle")
     }
 }
 
-@_cdecl("jinx_entry")
-func jinxEntry() {
+@objc(SATRuntime)
+final class SatellaRuntime: NSObject {
+    @objc(runtimeActive)
+    static func runtimeActive() -> Bool {
+        Preferences.shouldOverrideStoreKit
+    }
+
+    @objc(priceOverrideEnabled)
+    static func priceOverrideEnabled() -> Bool {
+        Preferences.snapshot.isPriceZero
+    }
+
+    @objc(receiptOverrideEnabled)
+    static func receiptOverrideEnabled() -> Bool {
+        Preferences.snapshot.isReceipt
+    }
+
+    @objc(observerOverrideEnabled)
+    static func observerOverrideEnabled() -> Bool {
+        Preferences.snapshot.isObserver
+    }
+
+    @objc(receiptForTransaction:)
+    static func receipt(for transaction: SKPaymentTransaction) -> Data? {
+        let receipt = ReceiptGenerator.old(for: transaction.payment.productIdentifier)
+        return try? JSONEncoder().encode(receipt)
+    }
+
+    @objc(observerProxyForObserver:)
+    static func observerProxy(for observer: AnyObject) -> AnyObject? {
+        guard let observer = observer as? SKPaymentTransactionObserver else {
+            return nil
+        }
+        SatellaObserver.shared.add(observer)
+        return SatellaObserver.shared
+    }
+}
+
+@_cdecl("satella_entry")
+func satellaEntry() {
     Tweak.ctor()
 }

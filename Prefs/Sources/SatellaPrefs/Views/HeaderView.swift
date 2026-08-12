@@ -9,12 +9,12 @@ final class HeaderView: UITableViewCell {
         let width: CGFloat = self.contentView.bounds.size.width
         let height: CGFloat = 120.0
         
-        tweakLabel.text = "Satella"
+        tweakLabel.text = "Satella 2"
         tweakLabel.font = UIFont.systemFont(ofSize: 32, weight: .semibold)
         tweakLabel.textColor = .white
         tweakLabel.sizeToFit()
         
-        devLabel.text = "by Paisseon"
+        devLabel.text = "StoreKit Lab"
         devLabel.font = UIFont.systemFont(ofSize: 24, weight: .light)
         devLabel.textColor = .lightText
         devLabel.sizeToFit()

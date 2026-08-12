@@ -1,0 +1,93 @@
+{
+  "identifier" : "7C1FD69B-75E5-4F2B-A1A1-57CBF0A3C448",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "C98E21D1-201A-4BCA-A279-E8D34741CB61",
+      "localizations" : [
+        {
+          "description" : "A repeatable StoreKit laboratory purchase.",
+          "displayName" : "Lab Consumable",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "emt.paisseon.satellalab.consumable",
+      "referenceName" : "Lab Consumable",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "2.99",
+      "familyShareable" : false,
+      "internalID" : "25A2CFDA-AB95-4BA0-B33C-82375B63FC47",
+      "localizations" : [
+        {
+          "description" : "A durable entitlement for StoreKit laboratory testing.",
+          "displayName" : "Lab Non-Consumable",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "emt.paisseon.satellalab.nonconsumable",
+      "referenceName" : "Lab Non-Consumable",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "1234567890",
+    "_developerTeamID" : "",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 0,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+
+    ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "9E829956-8A3F-4C95-9991-36179E4EC71F",
+      "localizations" : [
+        {
+          "description" : "Test subscription group",
+          "displayName" : "Satella Lab Subscription",
+          "locale" : "en_US"
+        }
+      ],
+      "name" : "Satella Lab Subscription",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "1.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "297495B0-6A80-4AB4-8626-2397A7781E36",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "A monthly StoreKit laboratory subscription.",
+              "displayName" : "Lab Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "emt.paisseon.satellalab.subscription.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Lab Monthly",
+          "subscriptionGroupID" : "9E829956-8A3F-4C95-9991-36179E4EC71F",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

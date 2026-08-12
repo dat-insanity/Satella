@@ -1,6 +1,6 @@
 import Preferences
 
-struct ColourCell: JinxCell {
+struct ColourCell: SpecifierCell {
     let name: String
     let key: String
     let defaultValue: String

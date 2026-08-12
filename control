@@ -1,12 +1,10 @@
 Package: emt.paisseon.satella
-Name: Satella
-Version: 1.8.1
-Architecture: iphoneos-arm
-Description: Modern in-app purchase cracker
+Name: Satella 2 Rootless Lab
+Version: 2.0.0~beta.0
+Architecture: iphoneos-arm64
+Description: Authorized StoreKit 1 and StoreKit 2 security-testing laboratory for Dopamine
 Maintainer: Lilliana
 Author: Lilliana
-Section: Tweaks (Piracy)
-Depends: mobilesubstrate, firmware (>= 12.2), preferenceloader, com.opa334.altlist
-SileoDepiction: https://paisseon.github.io/depictions/Satella.json
-Depiction: https://pinpal.github.io/Sileo-Depiction-WebViews/?json=https://paisseon.github.io/depictions/Satella.json&name=Satella&dev=Lilliana
-Icon: https://paisseon.github.io/icons/Satella.png
+Section: Development
+Depends: mobilesubstrate, firmware (>= 15.0), preferenceloader, com.opa334.altlist
+Conflicts: emt.paisseon.satella-rootful

@@ -1,6 +1,6 @@
 import Preferences
 
-struct ToggleCell: JinxCell {
+struct ToggleCell: SpecifierCell {
     let name: String
     let key: String
     let defaultValue: Bool

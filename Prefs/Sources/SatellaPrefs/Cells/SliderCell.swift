@@ -1,6 +1,6 @@
 import Preferences
 
-struct SliderCell: JinxCell {
+struct SliderCell: SpecifierCell {
     let name: String
     let key: String
     let defaultValue: Double

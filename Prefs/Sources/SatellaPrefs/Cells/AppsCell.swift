@@ -1,6 +1,6 @@
 import Preferences
 
-struct AppsCell: JinxCell {
+struct AppsCell: SpecifierCell {
     let name: String
     let key: String
     let defaultValue: Bool
@@ -24,7 +24,7 @@ struct AppsCell: JinxCell {
         appsCell.setProperty(true, forKey: "showIdentifiersAsSubtitle")
         appsCell.setProperty(true, forKey: "includeIdentifiersInSearch")
         appsCell.setProperty(true, forKey: "useSearchBar")
-        appsCell.setProperty(NSArray(array: [["sectionType": "User"]]), forKey: "sections")
+        appsCell.setProperty(PrefsHelper.altListSections, forKey: "sections")
         
         return appsCell
     }

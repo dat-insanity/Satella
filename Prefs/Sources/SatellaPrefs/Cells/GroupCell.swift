@@ -1,6 +1,6 @@
 import Preferences
 
-struct GroupCell: JinxCell {
+struct GroupCell: SpecifierCell {
     let name: String
     let footerText: String
     
