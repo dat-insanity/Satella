@@ -3,9 +3,6 @@
 /Packages
 /*.xcodeproj
 xcuserdata/
-
-.theos
-/packages
 .theos/
 packages/
-.DS_Store
+artifacts/

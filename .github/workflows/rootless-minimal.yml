@@ -1,0 +1,49 @@
+name: Rootless minimal prerelease
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/rootless-ios17-minimal]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 30
+    env:
+      THEOS: ${{ github.workspace }}/.theos
+      PACKAGE_VERSION: 2.0.0~beta.${{ github.run_number }}
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install Theos and patched SDKs
+        run: |
+          brew list ldid >/dev/null 2>&1 || brew install ldid
+          brew list dpkg >/dev/null 2>&1 || brew install dpkg
+          git clone --quiet --recursive --depth 1 https://github.com/theos/theos.git "$THEOS"
+          git clone --quiet --depth 1 https://github.com/theos/sdks.git "${RUNNER_TEMP}/theos-sdks"
+          mkdir -p "$THEOS/sdks"
+          cp -R "${RUNNER_TEMP}/theos-sdks"/*.sdk "$THEOS/sdks/"
+
+      - name: Build rootless package
+        run: make clean package FINALPACKAGE=1 PACKAGE_VERSION="$PACKAGE_VERSION"
+
+      - name: Inspect package
+        run: |
+          mkdir -p artifacts
+          package_path="$(find packages -maxdepth 1 -name '*.deb' -print -quit)"
+          test -n "$package_path"
+          bash Scripts/verify_package.sh "$package_path" artifacts/package-inspection.txt
+          cp "$package_path" artifacts/
+
+      - name: Upload prerelease package
+        uses: actions/upload-artifact@v4
+        with:
+          name: satella-rootless-minimal-${{ env.PACKAGE_VERSION }}
+          path: artifacts/
+          if-no-files-found: error

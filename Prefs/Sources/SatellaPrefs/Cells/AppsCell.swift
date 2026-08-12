@@ -4,7 +4,7 @@ struct AppsCell: JinxCell {
     let name: String
     let key: String
     let defaultValue: Bool
-    
+
     func specifier(for target: PSListController) -> PSSpecifier {
         let appsCell: PSSpecifier = .preferenceSpecifierNamed(
             name,
@@ -15,7 +15,7 @@ struct AppsCell: JinxCell {
             cell: .linkListCell,
             edit: nil
         )
-        
+
         appsCell.identifier = key
         appsCell.setProperty(key, forKey: "key")
         appsCell.setProperty(defaultValue, forKey: "defaultApplicationSwitchValue")
@@ -24,8 +24,8 @@ struct AppsCell: JinxCell {
         appsCell.setProperty(true, forKey: "showIdentifiersAsSubtitle")
         appsCell.setProperty(true, forKey: "includeIdentifiersInSearch")
         appsCell.setProperty(true, forKey: "useSearchBar")
-        appsCell.setProperty(NSArray(array: [["sectionType": "User"]]), forKey: "sections")
-        
+        appsCell.setProperty(PrefsHelper.altListSections, forKey: "sections")
+
         return appsCell
     }
 }

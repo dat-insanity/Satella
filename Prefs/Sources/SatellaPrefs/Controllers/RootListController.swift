@@ -25,7 +25,7 @@ final class RootListController: PSListController {
             }
             
             SpecifierFactory.add([
-                GroupCell(name: "Injection Control", footerText: ""),
+                GroupCell(name: "Injection Control", footerText: "Global Injection applies to every app in the installed allowlist. Enabled Apps selects individual allowlisted targets."),
                 ToggleCell(name: "Global Injection", key: "isGloballyInjected", defaultValue: false),
                 AppsCell(name: "Enabled Apps", key: "apps", defaultValue: false),
                 GroupCell(name: "Links", footerText: ""),
@@ -82,7 +82,7 @@ final class RootListController: PSListController {
     }
     
     @objc private func respring() {
-        PrefsHelper.write()
+        PrefsHelper.writeAndNotify()
         PrefsHelper.respring(withView: view)
     }
     
